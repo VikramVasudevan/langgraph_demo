@@ -1,28 +1,27 @@
-from typing import TypedDict
+from typing import TypedDict, override
 from langgraph.constants import END, START
 from langgraph.graph.state import StateGraph
 from typing_extensions import Annotated
 from pydantic import BaseModel
 from langgraph.graph.message import add_messages
 import gradio as gr
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
 
-
+load_dotenv(override=True)
 class State(TypedDict):
     messages: Annotated[list, add_messages]
 
 
 graph_builder = StateGraph(State)
 
+llm = ChatOpenAI(model="gpt-4o-mini")
+
 
 def chatNode(state: State):
     messages = state["messages"]
     print("messages = ",messages)
-    message_count = len(messages)
-    print("message_count = ", message_count)
-    responseMessage = {
-        "role": "assistant",
-        "content": f"this was message #{message_count}.",
-    }
+    responseMessage =  llm.invoke(messages)
     newState = State(messages=[responseMessage])
     return newState
 
