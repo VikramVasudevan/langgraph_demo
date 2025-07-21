@@ -16,6 +16,7 @@ graph_builder = StateGraph(State)
 
 def chatNode(state: State):
     messages = state["messages"]
+    print("messages = ",messages)
     message_count = len(messages)
     print("message_count = ", message_count)
     responseMessage = {
@@ -36,14 +37,15 @@ def chat(message, history):
     # Ensure history is a list of message dicts
     if not history:
         history = []
-    state = State(messages=[message])
-    response = graph.invoke(state)
+    initial_state = State(messages=history + [{"role" : "user" , "content" : message}])
+    print("initial_state = ", initial_state)
+    response = graph.invoke(initial_state)
     return response["messages"][-1].content
 
 
 def main():
     print("Hello from langgraph-demo!")
-    gr.ChatInterface(chat).launch()
+    gr.ChatInterface(chat, type="messages").launch()
 
 
 if __name__ == "__main__":
