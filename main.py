@@ -53,7 +53,7 @@ def chat(message, history):
 
 def main():
     print("Hello from langgraph-demo!")
-    gr.ChatInterface(chat, type="messages").launch()
+    gr.ChatInterface(chat, type="messages", title="LangGraph Demo").launch()
 
 
 if __name__ == "__main__":
