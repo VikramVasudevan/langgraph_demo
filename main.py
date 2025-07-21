@@ -26,9 +26,18 @@ def chatNode(state: State):
     return newState
 
 
+def encryptNode(state: State):
+    messages = state["messages"]
+    messages[-1].content += "ASDFGHJKL"
+    newState = State(messages=messages)
+    return newState
+
+
 graph_builder.add_node("MyChatNode", chatNode)
+graph_builder.add_node("MyEncryptNode", encryptNode)
 graph_builder.add_edge(START, "MyChatNode")
-graph_builder.add_edge("MyChatNode", END)
+graph_builder.add_edge("MyChatNode", "MyEncryptNode")
+graph_builder.add_edge("MyEncryptNode", END)
 graph = graph_builder.compile()
 
 
