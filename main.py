@@ -58,6 +58,7 @@ def chat(message, history):
                 In your response, mention which chapter and verses from which you came up with this explanation.
                 DO NOT talk about other spiritual traditions. Limit yourself to the context at all times.
                 organize your response under subheadings for clarity and keep it simple in terms of language and brief. Do not add your interpretation or additional commentary.
+                Answer any question in the context of Bhagavat Gita (particularly from the context given below). If you dont know the answer, just say so.
 
                 here is the context:
                 {relevant_sections}
@@ -81,7 +82,7 @@ def main():
         type="messages",
         title="Let's chat on Bhagavat Gita",
         examples=[
-            "What is Karma as defined in Gita?",
+            "What does Gita say about Karma?",
             "Why did God create this world?",
             "What is the relationship between knowledge and action?",
             "Who are friends and enemies per Gita?"
